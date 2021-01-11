@@ -26,7 +26,7 @@ namespace Commander.Data
             var user = new IdentityUser()
             {
                 Email = userModel.Email,
-                UserName = "osxzhg"
+                UserName = userModel.Email
             };
             var result = await _userManager.CreateAsync(user, userModel.Password);
             return result;

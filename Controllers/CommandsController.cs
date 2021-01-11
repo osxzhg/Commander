@@ -22,14 +22,14 @@ namespace Commander.Controllers
             _mapper = mapper;
         }
         // private readonly MockCommanderRepo _repository = new MockCommanderRepo();
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public ActionResult <IEnumerable<CommandReadDto>> GetAllCommands()
         {
            var commandItems = _repository.GetAppCommands() ;
            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
-
+        [Authorize(Roles = "User")]
         [HttpGet("{id}",Name="GetCommandById")]
         public ActionResult <CommandReadDto> GetCommandById(int id)
         {
