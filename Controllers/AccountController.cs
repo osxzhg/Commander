@@ -35,7 +35,7 @@ namespace Commander.Controllers
         {
             if (await _accountRepository.IsValidUsernameAndPassword(user.Email, user.Password))
             {
-                return Ok();
+                return new ObjectResult(await _accountRepository.GenerateToken(user.Email));
             }
             else
             {

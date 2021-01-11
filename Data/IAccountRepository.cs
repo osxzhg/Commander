@@ -8,5 +8,6 @@ namespace Commander.Data
     {
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
         Task<bool> IsValidUsernameAndPassword(string email, string password);
+        Task<dynamic> GenerateToken(string username);
     }
 }
