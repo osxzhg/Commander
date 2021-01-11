@@ -7,6 +7,7 @@ using Commander.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,9 +32,13 @@ namespace Commander
             services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer
            (Configuration.GetConnectionString("CommanderConnection")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<CommanderContext>();
+
             services.AddControllers();
             //services.AddScoped<ICommanderRepo,MockCommanderRepo>();
             services.AddScoped<ICommanderRepo,SqlCommanderRepo>();
+            services.AddScoped<IAccountRepository,SqlAccountRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
@@ -55,6 +60,7 @@ namespace Commander
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

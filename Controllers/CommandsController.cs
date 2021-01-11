@@ -50,6 +50,8 @@ namespace Commander.Controllers
 
             var commandReadDto=_mapper.Map<CommandReadDto>(commandModel);
 
+
+            //Create a uri that can retrieve the data
             return CreatedAtRoute(nameof(GetCommandById), new { id = commandReadDto.Id }, commandReadDto);
         }
 
