@@ -5,12 +5,14 @@ using Commander.Dtos;
 using Commander.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class CommandsController: ControllerBase
     {
         private readonly ICommanderRepo _repository;
@@ -22,7 +24,7 @@ namespace Commander.Controllers
             _mapper = mapper;
         }
         // private readonly MockCommanderRepo _repository = new MockCommanderRepo();
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
         [HttpGet]
         public ActionResult <IEnumerable<CommandReadDto>> GetAllCommands()
         {
